@@ -68,9 +68,11 @@ public class login implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String user = userText.getText();
 		String password = passwordText.getText();
-		System.out.println(user + ", " + password);
-		if(user.equals("Aniss") && password.equals("Chalah")) {
-			success.setText("Login Successful");
+
+		if (!(func.checkCreds(user, password))) {
+			success.setText("Invalid Credentials");
+		} else {
+			success.setText("Login successfull");
 			Timer timer = new Timer();
 			TimerTask task = new TimerTask() {
 				@Override
@@ -78,14 +80,8 @@ public class login implements ActionListener {
 					frame.dispose();
 					menu.initialize();
 				}
-			};
-			
+			};			
 			timer.schedule(task, 2000);
-			
-
-		} else {
-			success.setText("Invalid Credentials");
-		}
+		}	
 	}
-
 }
