@@ -19,6 +19,8 @@ public class login implements ActionListener {
 	private static JLabel success;
 	private static JFrame frame;
 	
+	int loginCount = 0;
+	
 	public static void main(String[] args) {		
 		
 		JPanel panel = new JPanel();
@@ -66,11 +68,18 @@ public class login implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		loginCount++;
+		if (loginCount > 1) {return;} // prevent from clicking login multiple time during 2 second timer
+		
+		
+		
 		String user = userText.getText();
 		String password = passwordText.getText();
 
 		if (!(func.checkCreds(user, password))) {
 			success.setText("Invalid Credentials");
+			userText.setText("");
+			passwordText.setText("");
 		} else {
 			success.setText("Login successfull");
 			Timer timer = new Timer();
