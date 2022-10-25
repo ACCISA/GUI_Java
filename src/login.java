@@ -29,7 +29,7 @@ public class login implements ActionListener {
 		
 		JPanel panel = new JPanel();
 		
-		ImageIcon image = new ImageIcon("conco_logo.png");
+		ImageIcon image = new ImageIcon("src/images/conco_logo.png");
 		
 		frame = new JFrame();
 		frame.setSize(350, 200);

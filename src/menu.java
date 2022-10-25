@@ -24,9 +24,9 @@ public class menu extends JFrame implements ActionListener{
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
 		this.setVisible(true);
-//		loadIcon = new ImageIcon("load.png");
-//		saveIcon = new ImageIcon("save.png");
-//		exitIcon = new ImageIcon("exit.png");
+		loadIcon = new ImageIcon("src/images/load.png");
+		saveIcon = new ImageIcon("src/images/save.png");
+		exitIcon = new ImageIcon("src/images/exit.png");
 		
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
