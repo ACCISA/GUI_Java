@@ -1,3 +1,4 @@
+package source;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.util.Timer;
 import java.util.TimerTask;
+
 public class creds_reset implements ActionListener{
 	
 	private static JLabel showInfo;
@@ -81,6 +83,19 @@ public class creds_reset implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		
+		String newUser = updateUser.getText();
+		String newPass = updatePass.getText();
+		String newPassDupe = updatePassDupe.getText();
+		int funcReturn = func.checkUpdatedCreds(newUser, newPass, newPassDupe);
+		if ( funcReturn == 0) {
+			System.out.println("Credentials Updated");
+		} else if( funcReturn == 1 ) {
+			System.out.println("Inputted passwords do not match");
+		} else if( funcReturn == 2 ) {
+			System.out.println("Inputted credentials match old credentials");
+		} else {
+			System.out.println("An error occured when trying to set new credentials");
+		}
 		
 		
 	}

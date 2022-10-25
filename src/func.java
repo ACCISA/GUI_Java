@@ -1,3 +1,4 @@
+package source;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.List;
@@ -15,8 +16,42 @@ public class func {
 	
 	private static Dimension size;
 	
+	private static void setCreds(String username, String password) {
+		try {
+	    	FileWriter writer = new FileWriter("login_creds.txt");
+	    	writer.write(username + ";" + password);
+	    	writer.close();
+	    } catch (IOException e) {
+	    	System.out.println("An error occured while trying to update the credentials to the file.");
+	    	e.printStackTrace();
+	    }
+	}
 	
-	// CheckCredsFileExist
+	private static ArrayList getCreds() {
+		String data = "";
+
+	    try {
+	    	File objFile = new File("login_creds.txt");
+	    	Scanner reader = new Scanner(objFile);
+	    	while (reader.hasNextLine()) {
+	    		 data = reader.nextLine();
+	    	}
+	    	reader.close();
+	    	int indexOf = data.indexOf(';');
+	    	String userCreds = data.substring(0,indexOf);
+	    	String passCreds = data.substring(indexOf+1,data.length());
+	    	ArrayList<String> credsList = new ArrayList<>();	  
+	    	credsList.add(userCreds);
+	    	credsList.add(passCreds);
+	    	return credsList;
+	    } catch (FileNotFoundException e) {
+	    	System.out.println("An error occured when trying to read the login_data file.");
+	    	e.printStackTrace();
+	    	ArrayList<String> credsList = new ArrayList<>();
+	    	return credsList;
+	    }
+	}
+	// CheckCredsFileExist will find for the file that contains the user login info. if it doesnt exist it will create it and add default login info
 	public static void checkCredsFileExist() {
 		try {
 	    	File myObj = new File ("login_creds.txt");
@@ -27,11 +62,11 @@ public class func {
 	    	    	writer.write("admin;root");
 	    	    	writer.close();
 	    	    } catch (IOException e) {
-	    	    	System.out.println("An error occured while trying to write data to the file.");
+	    	    	System.out.println("An error occured while trying to write the default data to the file.");
 	    	    	e.printStackTrace();
 	    	    }
 	    	} else {
-	    		System.out.println("File  Already Exists");
+	    		System.out.println("Creds file already exists");
 	    	}
 	    	
 	    } catch (IOException e) {
@@ -40,11 +75,17 @@ public class func {
 	    }
 	}
 	
-	public static boolean checkUpdatedCreds(String username, String password, String passwordDupe) {
+	public static int checkUpdatedCreds(String username, String password, String passwordDupe) {
 		
-		if (!(password.equals(passwordDupe))) { return false;}
+		if (!(password.equals(passwordDupe))) {return 1;}
 		
-		return true;
+		if (getCreds().get(0).equals(username) && getCreds().get(1).equals(password)) {return 2;}
+		
+		else {
+			setCreds(username, password);
+			return 0;
+		}
+		
 		
 	}
 	
@@ -61,7 +102,7 @@ public class func {
 	}
 	
 	public static boolean checkCreds(String username, String password) {
-		if (!(username.equals("A") && password.equals("C"))) return false;			
+		if (!(username.equals(getCreds().get(0)) && password.equals(getCreds().get(1)))) return false;			
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 	    LocalDateTime now = LocalDateTime.now();		
@@ -71,7 +112,7 @@ public class func {
 	    	if (myObj.createNewFile()) {
 	    		System.out.println("File created: " + myObj.getName());
 	    	} else {
-	    		System.out.println("File  Already Exists");
+	    		System.out.println("Login Logs File  Already Exists");
 	    	}
 	    	
 	    } catch (IOException e) {

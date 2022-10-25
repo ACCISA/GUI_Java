@@ -1,6 +1,8 @@
+package source;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,11 +25,16 @@ public class login implements ActionListener {
 	
 	public static void main(String[] args) {		
 		
+		// make sure the credential file exists
+		func.checkCredsFileExist();
+		
 		JPanel panel = new JPanel();
-
+		
+		ImageIcon image = new ImageIcon("conco_logo.png");
 		
 		frame = new JFrame();
 		frame.setSize(350, 200);
+		frame.setIconImage(image.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocation(func.getWidth()/2-350/2, func.getHeight()/2-200/2);
