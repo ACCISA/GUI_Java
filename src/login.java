@@ -29,7 +29,7 @@ public class login implements ActionListener {
 		
 		JPanel panel = new JPanel();
 		
-		ImageIcon image = new ImageIcon("conco_logo.jpg");
+		ImageIcon image = new ImageIcon("conco_logo.png");
 		
 		frame = new JFrame();
 		frame.setSize(350, 200);
@@ -93,7 +93,7 @@ public class login implements ActionListener {
 				@Override
 				public void run() {
 					frame.dispose();
-					menu.initialize();
+					new menu();
 				}
 			};			
 			timer.schedule(task, 2000);

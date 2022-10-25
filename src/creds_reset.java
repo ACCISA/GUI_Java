@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,10 +34,14 @@ public class creds_reset implements ActionListener{
 		
 		JPanel panel = new JPanel();
 		
+		ImageIcon image = new ImageIcon("conco_logo.png");
+
+		
 		frame = new JFrame();
 		frame.setSize(500,200);
 		frame.setTitle("Reset Credentials");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setIconImage(image.getImage());
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocation(func.getWidth()/2-350/2, func.getHeight()/2-400/2);
 		frame.add(panel);
