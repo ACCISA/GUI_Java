@@ -1,4 +1,3 @@
-package source;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -89,15 +88,18 @@ public class creds_reset implements ActionListener{
 		int funcReturn = func.checkUpdatedCreds(newUser, newPass, newPassDupe);
 		if ( funcReturn == 0) {
 			System.out.println("Credentials Updated");
+			popup.createPopup("Warning", "Credentials have been updated.");
 		} else if( funcReturn == 1 ) {
 			System.out.println("Inputted passwords do not match");
+			popup.createPopup("Warning", "Passwords do not match.");
 		} else if( funcReturn == 2 ) {
 			System.out.println("Inputted credentials match old credentials");
+			popup.createPopup("Warning", "Credentials amtch old credentials.");
 		} else {
 			System.out.println("An error occured when trying to set new credentials");
 		}
 		
-		
+		frame.dispose();
 	}
 	
 }

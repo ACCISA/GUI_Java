@@ -1,4 +1,3 @@
-package source;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,7 +29,7 @@ public class login implements ActionListener {
 		
 		JPanel panel = new JPanel();
 		
-		ImageIcon image = new ImageIcon("conco_logo.png");
+		ImageIcon image = new ImageIcon("conco_logo.jpg");
 		
 		frame = new JFrame();
 		frame.setSize(350, 200);
