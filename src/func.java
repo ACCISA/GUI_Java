@@ -15,6 +15,39 @@ public class func {
 	
 	private static Dimension size;
 	
+	
+	// CheckCredsFileExist
+	public static void checkCredsFileExist() {
+		try {
+	    	File myObj = new File ("login_creds.txt");
+	    	if (myObj.createNewFile()) {
+	    		System.out.println("File created: " + myObj.getName());
+	    		try {
+	    	    	FileWriter writer = new FileWriter("login_creds.txt");
+	    	    	writer.write("admin;root");
+	    	    	writer.close();
+	    	    } catch (IOException e) {
+	    	    	System.out.println("An error occured while trying to write data to the file.");
+	    	    	e.printStackTrace();
+	    	    }
+	    	} else {
+	    		System.out.println("File  Already Exists");
+	    	}
+	    	
+	    } catch (IOException e) {
+	    	System.out.println("An error occurred while trying to create the file containing login credentials.");
+	    	e.printStackTrace();
+	    }
+	}
+	
+	public static boolean checkUpdatedCreds(String username, String password, String passwordDupe) {
+		
+		if (!(password.equals(passwordDupe))) { return false;}
+		
+		return true;
+		
+	}
+	
 	public static int getWidth() {
 		size = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int)size.getWidth();
