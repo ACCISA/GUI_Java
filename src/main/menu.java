@@ -1,6 +1,9 @@
+package main;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.*;
+
+import accountMenu.account;
 
 public class menu extends JFrame implements ActionListener{
 
@@ -13,10 +16,11 @@ public class menu extends JFrame implements ActionListener{
 	JMenuItem saveItem;
 	JMenuItem exitItem;
 	JMenuItem resetItem;
+	JMenuItem usersItem;
 	ImageIcon loadIcon;
 	ImageIcon saveIcon;
 	ImageIcon exitIcon;
-
+	ImageIcon logo;
 	
 	menu(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,6 +28,8 @@ public class menu extends JFrame implements ActionListener{
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
 		this.setVisible(true);
+		logo = new ImageIcon("src/images/conco_logo.png");
+		this.setIconImage(logo.getImage());
 		loadIcon = new ImageIcon("src/images/load.png");
 		saveIcon = new ImageIcon("src/images/save.png");
 		exitIcon = new ImageIcon("src/images/exit.png");
@@ -38,15 +44,18 @@ public class menu extends JFrame implements ActionListener{
 		saveItem = new JMenuItem("Save");
 		exitItem = new JMenuItem("Exit");	
 		resetItem = new JMenuItem("Reset Credentials");
+		usersItem = new JMenuItem("Add Users");
 		
 		loadItem.addActionListener(this);
 		saveItem.addActionListener(this);
 		exitItem.addActionListener(this);
 		resetItem.addActionListener(this);
+		usersItem.addActionListener(this);
 		
 		loadItem.setIcon(loadIcon);
 		saveItem.setIcon(saveIcon);
 		exitItem.setIcon(exitIcon);
+		
 		
 		loadItem.setMnemonic(KeyEvent.VK_L); // l for load
 		saveItem.setMnemonic(KeyEvent.VK_S);
@@ -60,6 +69,7 @@ public class menu extends JFrame implements ActionListener{
 		fileMenu.add(exitItem);
 		
 		accountMenu.add(resetItem);
+		accountMenu.add(usersItem);
 		
 		menuBar.add(fileMenu);
 		menuBar.add(accountMenu);
@@ -85,6 +95,9 @@ public class menu extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == resetItem) {
 			creds_reset.initialize();
+		}
+		if(e.getSource() == usersItem) {
+			account.addUser();
 		}
 	}
 
