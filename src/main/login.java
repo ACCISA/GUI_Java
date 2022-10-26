@@ -19,7 +19,7 @@ public class login implements ActionListener {
 	private static JPasswordField passwordText;
 	private static JButton button;
 	private static JLabel success;
-	private static JFrame frame;
+	private static JFrame frameLogin;
 	
 	int loginCount = 0;
 	
@@ -32,13 +32,13 @@ public class login implements ActionListener {
 		
 		ImageIcon image = new ImageIcon("src/images/conco_logo.png");
 		
-		frame = new JFrame();
-		frame.setSize(350, 200);
-		frame.setIconImage(image.getImage());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setLocation(func.getWidth()/2-350/2, func.getHeight()/2-200/2);
-		frame.add(panel);
+		frameLogin = new JFrame();
+		frameLogin.setSize(350, 200);
+		frameLogin.setIconImage(image.getImage());
+		frameLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameLogin.setResizable(false);
+		frameLogin.setLocation(func.getWidth()/2-350/2, func.getHeight()/2-200/2);
+		frameLogin.add(panel);
 		
 		panel.setLayout(null);
 		
@@ -67,7 +67,7 @@ public class login implements ActionListener {
 		success.setBounds(10,110,300,25);
 		panel.add(success);
 		
-		frame.setVisible(true);
+		frameLogin.setVisible(true);
 
 		
 		
@@ -93,7 +93,7 @@ public class login implements ActionListener {
 			TimerTask task = new TimerTask() {
 				@Override
 				public void run() {
-					frame.dispose();
+					frameLogin.dispose();
 					new menu();
 				}
 			};			

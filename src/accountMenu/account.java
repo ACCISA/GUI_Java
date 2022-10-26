@@ -12,11 +12,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import main.func;
+import main.menu;
+import main.popup;
 
 
 public class account implements ActionListener {
 
-	private static JFrame frame;
+	public static JFrame frame;
 	private static JPanel panel;
 	private static JTextField inputUser;
 	private static JPasswordField inputPass;
@@ -27,6 +29,7 @@ public class account implements ActionListener {
 	private static JButton create;
 	
 	public static void addUser() {
+		
 		
 		ImageIcon image = new ImageIcon("src/images/conco_logo.png");
 		panel = new JPanel();
@@ -82,6 +85,26 @@ public class account implements ActionListener {
 		String passDupe = inputPassDupe.getText();
 		
 		
+		boolean canContinue = true;
+		if (user.length() == 0 || pass.length() == 0 || passDupe.length() == 0) {
+			frame.setAlwaysOnTop(false);
+			popup.createPopup("Warning", "Please enter a valid information.",frame);
+			canContinue = false;
+		}
+		
+		if (!(pass.equals(passDupe))) {
+			frame.setAlwaysOnTop(false);
+			popup.createPopup("Warning", "Passwords do no match",frame);
+			canContinue = false;
+		}
+		
+		if (canContinue) {
+			System.out.println("Account Creation Started");
+			frame.dispose();
+			menu.state = true;
+		}
+		
+		// create a function to check if the user already exists
 	}
 	
 }

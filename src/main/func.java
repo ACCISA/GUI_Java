@@ -81,7 +81,9 @@ public class func {
 		
 		if (getCreds().get(0).equals(username) && getCreds().get(1).equals(password)) {return 2;}
 		
-		else {
+		if(username.length()==0 || password.length() == 0 || passwordDupe.length() == 0) {
+			return 3;
+		} else {
 			setCreds(username, password);
 			return 0;
 		}
@@ -99,6 +101,10 @@ public class func {
 		size = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int)size.getHeight();
 		return height;
+	}
+	
+	public static void setState() {
+		menu.state = true;
 	}
 	
 	public static boolean checkCreds(String username, String password) {

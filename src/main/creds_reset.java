@@ -1,6 +1,7 @@
 package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +21,7 @@ public class creds_reset implements ActionListener{
 	private static JPasswordField updatePass;
 	private static JPasswordField updatePassDupe;
 	private static JButton buttonUpdate;
-	private static JFrame frame;
+	public static JFrame frameCredsReset;
 	private static JLabel user;
 	private static JLabel pass1;
 	private static JLabel pass2;
@@ -33,19 +34,20 @@ public class creds_reset implements ActionListener{
 	public static void initialize() {
 		
 		
+		
 		JPanel panel = new JPanel();
 		
 		ImageIcon image = new ImageIcon("src/images/conco_logo.png");
-
 		
-		frame = new JFrame();
-		frame.setSize(500,200);
-		frame.setTitle("Reset Credentials");
-		frame.setIconImage(image.getImage());
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setLocation(func.getWidth()/2-350/2, func.getHeight()/2-400/2);
-		frame.add(panel);
+		frameCredsReset = new JFrame();
+		frameCredsReset.setSize(500,200);
+		frameCredsReset.setAlwaysOnTop(true);
+		
+		frameCredsReset.setTitle("Reset Credentials");
+		frameCredsReset.setIconImage(image.getImage());
+
+		frameCredsReset.setLocation(func.getWidth()/2-350/2, func.getHeight()/2-400/2);
+		frameCredsReset.add(panel);
 		
 		panel.setLayout(null);
 		
@@ -82,8 +84,9 @@ public class creds_reset implements ActionListener{
 		buttonUpdate.addActionListener(new creds_reset());
 		panel.add(buttonUpdate);
 		
-		frame.setVisible(true);
+		frameCredsReset.setVisible(true);
 		
+			
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -91,21 +94,27 @@ public class creds_reset implements ActionListener{
 		String newUser = updateUser.getText();
 		String newPass = updatePass.getText();
 		String newPassDupe = updatePassDupe.getText();
+		frameCredsReset.setAlwaysOnTop(false);
 		int funcReturn = func.checkUpdatedCreds(newUser, newPass, newPassDupe);
+		
 		if ( funcReturn == 0) {
 			System.out.println("Credentials Updated");
-			popup.createPopup("Warning", "Credentials have been updated.");
+			popup.createPopup("Warning", "Credentials have been updated.",frameCredsReset);
+			frameCredsReset.dispose();
+			menu.state = true;
+
 		} else if( funcReturn == 1 ) {
 			System.out.println("Inputted passwords do not match");
-			popup.createPopup("Warning", "Passwords do not match.");
+			popup.createPopup("Warning", "Passwords do not match.",frameCredsReset);
 		} else if( funcReturn == 2 ) {
 			System.out.println("Inputted credentials match old credentials");
-			popup.createPopup("Warning", "Credentials amtch old credentials.");
-		} else {
+			popup.createPopup("Warning", "Credentials match old credentials.",frameCredsReset);
+		} else if(funcReturn == 3) { 
+			System.out.println("No Input");
+			popup.createPopup("Warning", "Please input valid information" , frameCredsReset);
+		}else {
 			System.out.println("An error occured when trying to set new credentials");
 		}
 		
-		frame.dispose();
-	}
-	
+	}	
 }

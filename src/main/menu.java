@@ -7,6 +7,10 @@ import accountMenu.account;
 
 public class menu extends JFrame implements ActionListener{
 
+
+	public static boolean state = true;
+
+	
 	JMenuBar menuBar;
 	JMenu accountMenu;
 	JMenu fileMenu;
@@ -21,6 +25,7 @@ public class menu extends JFrame implements ActionListener{
 	ImageIcon saveIcon;
 	ImageIcon exitIcon;
 	ImageIcon logo;
+	JFrame frameObj;
 	
 	menu(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,22 +88,68 @@ public class menu extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		int eventCaller = 0;
 		
-		if(e.getSource() == loadItem ) { // find which menu item was called
-			System.out.println("fileloaded");
+		
+		if (e.getSource() == exitItem) System.exit(0);
+		if (e.getSource() == loadItem) eventCaller = 1;
+		if (e.getSource() == saveItem) eventCaller = 2;
+		if (e.getSource() == resetItem) eventCaller = 3;
+		if (e.getSource() == usersItem) eventCaller = 4;
+		
+		
+		JMenuItem menuObj = null;
+		switch (eventCaller) {
+			case 1:
+				System.out.println("fileloaded");
+				menuObj = loadItem;
+				break;
+			case 2:
+				System.out.println("save");
+				menuObj = saveItem;
+				break;
+			case 3:
+				menuObj = resetItem;
+				break;
+			case 4:
+				menuObj = usersItem;
+				break;
+			default:
+				System.out.println("Error trying to open menu item");
+				break;
+			
 		}
-		if(e.getSource() == saveItem ) { // find which menu item was called
-			System.out.println("save");
+		
+		if (menuObj.isVisible()) System.out.println("is visible");
+		if (!(menuObj.isVisible())) System.out.println("is visible");
+
+		if (frameObj != null) {
+			if (!(frameObj.isActive())) {
+				return;
+			}
+			System.out.println("frame is not active");
+			state = true;
 		}
-		if(e.getSource() == exitItem ) { // find which menu item was called
-			System.exit(0);
-		}
-		if(e.getSource() == resetItem) {
-			creds_reset.initialize();
-		}
-		if(e.getSource() == usersItem) {
-			account.addUser();
-		}
+		if (state == false && menuObj.isVisible()) return;		
+
+		switch (eventCaller) {
+			case 1:
+				state = false;
+				break;
+			case 2:
+				state = false;
+				break;
+			case 3:
+				state = false;
+				creds_reset.initialize();
+				frameObj = creds_reset.frameCredsReset;
+				break;
+			case 4:
+				state = false;
+				account.addUser();
+				frameObj = account.frame;
+				break;
+		}	
 	}
 
 }
