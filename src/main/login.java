@@ -1,6 +1,8 @@
 package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.nio.file.Path;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +27,8 @@ public class login implements ActionListener {
 	
 	public static void main(String[] args) {		
 		
+		data.csv.createDatabase();
+		data.csv.readData("src/Databases/accounts.csv");
 		// make sure the credential file exists
 		func.checkCredsFileExist();
 		
