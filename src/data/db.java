@@ -23,9 +23,9 @@ public class db {
 			System.out.println("Driver not found");
 			e.printStackTrace();
 		}
-		String url = "jdbc:mysql://**:3306/appdb";
+		String url = "jdbc:mysql://127.0.0.1:3306/appdb";
 		try {
-			con = DriverManager.getConnection(url, "**", "**");
+			con = DriverManager.getConnection(url, "", "");
 			System.out.println("[DB] Connected");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -96,12 +96,22 @@ public class db {
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
-				// log the login time
-				db.disconnect();
+				// log the login time 
 
 			}
 		};			
 		timer.schedule(task, 2000);
+	}
+	
+	public static void getUsers() {
+		db.connect();
+        String sql = "select * from accounts";
+        try{
+			PreparedStatement checkStmtLog = con.prepareStatement(sql);
+
+            ResultSet rs = checkStmtLog.executeQuery();
+//            t1.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch(Exception e){}
 	}
 	
 }

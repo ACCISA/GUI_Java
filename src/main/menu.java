@@ -4,6 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import accountMenu.account;
+import accountMenu.viewUsers;
 
 public class menu extends JFrame implements ActionListener{
 
@@ -21,11 +22,13 @@ public class menu extends JFrame implements ActionListener{
 	JMenuItem exitItem;
 	JMenuItem resetItem;
 	JMenuItem usersItem;
+	JMenuItem viewUsersItem;
 	ImageIcon loadIcon;
 	ImageIcon saveIcon;
 	ImageIcon exitIcon;
 	ImageIcon logo;
 	JFrame frameObj;
+	
 	
 	menu(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,12 +53,14 @@ public class menu extends JFrame implements ActionListener{
 		exitItem = new JMenuItem("Exit");	
 		resetItem = new JMenuItem("Reset Credentials");
 		usersItem = new JMenuItem("Add Users");
+		viewUsersItem = new JMenuItem("View Users");
 		
 		loadItem.addActionListener(this);
 		saveItem.addActionListener(this);
 		exitItem.addActionListener(this);
 		resetItem.addActionListener(this);
 		usersItem.addActionListener(this);
+		viewUsersItem.addActionListener(this);
 		
 		loadItem.setIcon(loadIcon);
 		saveItem.setIcon(saveIcon);
@@ -75,6 +80,7 @@ public class menu extends JFrame implements ActionListener{
 		
 		accountMenu.add(resetItem);
 		accountMenu.add(usersItem);
+		accountMenu.add(viewUsersItem);
 		
 		menuBar.add(fileMenu);
 		menuBar.add(accountMenu);
@@ -90,7 +96,10 @@ public class menu extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		int eventCaller = 0;
 		
-		
+		if (e.getSource() == viewUsersItem) {
+			System.out.println("Opening view users");
+			viewUsers.viewUsers();
+		}
 		if (e.getSource() == exitItem) System.exit(0);
 		if (e.getSource() == loadItem) eventCaller = 1;
 		if (e.getSource() == saveItem) eventCaller = 2;
