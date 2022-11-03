@@ -1,8 +1,10 @@
 package main;
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,10 +29,12 @@ public class login implements ActionListener {
 	
 	public static void main(String[] args) {		
 		
-		data.csv.createDatabase();
-		data.csv.readData("src/Databases/accounts.csv");
+//		data.csv.createDatabase();
+//		Path filePath =  Paths.get("src/Databases/accounts.csv");
+//		data.csv.readAllLines(filePath);
+
 		// make sure the credential file exists
-		func.checkCredsFileExist();
+//		func.checkCredsFileExist();
 		
 		JPanel panel = new JPanel();
 		
@@ -79,6 +83,7 @@ public class login implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		data.db.connect();
 		loginCount++;
 		if (loginCount > 1) {return;} // prevent from clicking login multiple time during 2 second timer
 		
@@ -86,18 +91,22 @@ public class login implements ActionListener {
 		
 		String user = userText.getText();
 		String password = passwordText.getText();
-
-		if (!(func.checkCreds(user, password))) {
+		
+		if (!(data.db.checkCreds(user, password))) {
 			success.setText("Invalid Credentials");
 			userText.setText("");
 			passwordText.setText("");
 		} else {
 			success.setText("Login successfull");
+			String curTime = func.getTime();
+			data.db.logLogin(user, curTime);
 			Timer timer = new Timer();
 			TimerTask task = new TimerTask() {
 				@Override
 				public void run() {
 					frameLogin.dispose();
+					// log the login time
+					
 					new menu();
 				}
 			};			

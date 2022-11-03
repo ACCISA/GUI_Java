@@ -99,9 +99,11 @@ public class account implements ActionListener {
 		}
 		
 		if (canContinue) {
-			System.out.println("Account Creation Started");
+			System.out.println("[ACC] Account Creation Started");
+			data.db.createUser(user, pass);
 			frame.dispose();
 			menu.state = true;
+
 		}
 		
 		// create a function to check if the user already exists

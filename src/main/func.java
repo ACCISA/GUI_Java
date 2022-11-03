@@ -107,6 +107,8 @@ public class func {
 		menu.state = true;
 	}
 	
+
+	
 	public static boolean checkCreds(String username, String password) {
 		if (!(username.equals(getCreds().get(0)) && password.equals(getCreds().get(1)))) return false;			
 		
@@ -170,6 +172,12 @@ public class func {
 		return true;
 		
 		
+	}
+	
+	public static String getTime() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+		return dtf.format(now);
 	}
 	
 	

@@ -1,8 +1,12 @@
 package data;
 import java.io.FileWriter;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -13,38 +17,20 @@ import com.opencsv.CSVWriter;
 
 public class csv {
 	
-	public static List<String[]> readAllLines(Path filePath) throws Exception {
-	    try (Reader reader = Files.newBufferedReader(filePath)) {
-	        try (CSVReader csvReader = new CSVReader(reader)) {
-	            return csvReader.readAll();
-	        }
+	public static void readAllLines(Path filePath){
+	    try {
+	    	Scanner scanner = new Scanner(filePath.toFile());
+	    	scanner.useDelimiter(",");
+	    	while(scanner.hasNext()) {
+	    		System.out.println(scanner.next() + " ");
+	    	}
+	    	scanner.close();
+	    } catch (FileNotFoundException e) {
+	    	e.printStackTrace();
 	    }
 	}
 	
-	
-	public static void readData(String filePath) {
-		CSVReader reader = null;
-		String[] nextLine;
 
-//		try {
-//			reader = new CSVReader(new FileReader("src/Databases/accounts.csv"));
-//			while ((nextLine = reader.readNext()) != null) {
-//				for (String token: nextLine) {
-//					System.out.println(token);
-//				}
-//				System.out.println();
-//
-//			}
-//		} catch (Exception e) { 
-//			System.out.println("[DB] Erorr trying to read database");
-//			e.printStackTrace();
-//		}
-		
-		try (BufferedReader br = new Buffered) {
-		
-		}
-		
-	}
 	
 	
 	
