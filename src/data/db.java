@@ -23,9 +23,9 @@ public class db {
 			System.out.println("Driver not found");
 			e.printStackTrace();
 		}
-		String url = "jdbc:mysql://127.0.0.1:3306/appdb";
+		String url = "jdbc:mysql://**:3306/appdb";
 		try {
-			con = DriverManager.getConnection(url, "root", "aniss2003");
+			con = DriverManager.getConnection(url, "**", "**");
 			System.out.println("[DB] Connected");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
